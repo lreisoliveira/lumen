@@ -3,7 +3,6 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-
 class InstituicoesSeeder extends Seeder
 {
     /**
@@ -13,22 +12,30 @@ class InstituicoesSeeder extends Seeder
      */
     public function run()
     {
-    	
-		$file = '/var/www/lumen/database/csv/teste1';
+		$file = '/var/www/lumen/database/_files/instituicoes.txt';
 		$ponteiro = fopen ($file, "r");
 		while (!feof ($ponteiro)) {
+
 			$texto = fgets($ponteiro, 4096);
-			if (is_string($texto)) {
-				var_dump($texto);
-				//$this->insert($texto);
+			
+			list($nome,$cidade) = explode('-',$texto);
+			
+			$nome 	= trim($nome);
+			$cidade = trim($cidade);
+				
+			if (is_string($nome) && is_string($cidade)) {
+				$this->insert($nome,$cidade);
 			}
     	}
     }
     
-    private function insert($texto)
+    private function insert($nome,$cidade)
     {
+    	$hash = mt_rand(1, 9999) . mt_rand(1, 9999);
     	DB::table('instituicoes')->insert([
-    			'nome' => $texto,
+			'nome' 		=> utf8_encode($nome),
+    		'cidade'	=> $cidade,
+    		'token' 	=> password_hash( $hash,   PASSWORD_DEFAULT)
     	]);
     }
     
