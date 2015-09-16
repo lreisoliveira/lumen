@@ -15,5 +15,6 @@ $app->get('/', function () use ($app) {
     return $app->welcome();
 });
 
+//dd($environment = App::environment());
 
 $app->get('/instituicoes', 'Instituicoes@get');
