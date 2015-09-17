@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-//Dotenv::load(__DIR__.'/../');
+Dotenv::load(__DIR__.'/../');
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +19,8 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
-$app->configure('mydatabase');
-
-//dd(Config('mydatabase'));
-
+//$app->configure('database');
+//dd(Config('database'));
 //die;
 
 $app->withFacades();

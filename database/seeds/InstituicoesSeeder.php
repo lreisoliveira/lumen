@@ -33,7 +33,7 @@ class InstituicoesSeeder extends Seeder
     {
     	$hash = mt_rand(1, 9999) . mt_rand(1, 9999);
     	DB::table('instituicoes')->insert([
-			'nome' 		=> utf8_encode($nome),
+			'nome' 		=> $nome,
     		'cidade'	=> $cidade,
     		'token' 	=> password_hash( $hash,   PASSWORD_DEFAULT)
     	]);
